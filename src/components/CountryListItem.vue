@@ -18,7 +18,7 @@ export default {
   methods: {
     ...mapActions(['toggleVisited']),
     _toggleVisited: function() {
-      this.toggleVisited(this.country.index);
+      this.toggleVisited({ countryIndex: this.country.index });
     }
   },
   computed: {

@@ -1,12 +1,12 @@
 <template>
   <div class="map-container">
-    <div class="map" v-html="mapImg" />
+    <div class="map" v-html="mapImg" @click="_toggleVisited" />
     <div class="style" v-html="visitedCountriesCss" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import MapImg from '../assets/world.svg';
 export default {
   data() {
@@ -27,6 +27,20 @@ export default {
 
       return `<style>${style}</style>`;
     }
+  },
+  methods: {
+    ...mapActions(['toggleVisited']),
+    _toggleVisited: function(event) {
+      const country = event.target.closest('path[data-name]');
+      const aCountryWasClicked = country !== null;
+
+      if (!aCountryWasClicked) {
+        return;
+      }
+
+      const countryName = country.dataset.name;
+      this.toggleVisited({ countryName });
+    }
   }
 };
 </script>
@@ -42,6 +56,11 @@ export default {
 
 svg [data-name] {
   transition: fill 0.15s ease-in-out;
+}
+
+svg [data-name]:hover {
+  cursor: pointer;
+  fill: rgba(126, 30, 89, 0.3) !important;
 }
 
 .style {

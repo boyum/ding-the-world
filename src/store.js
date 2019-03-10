@@ -18,9 +18,21 @@ const store = new VueX.Store({
     SET_COUNTRIES(state, countries) {
       state.countries = countries;
     },
-    TOGGLE_VISITED(state, countryIndex) {
+    TOGGLE_VISITED(
+      state,
+      { countryIndex, countryName } = { countryIndex: -1, countryName: '' }
+    ) {
+      const indexWasPassed = countryIndex > -1;
+      const nameWasPassed = countryName.length > 0;
+
       state.countries = state.countries.map((country, index) => {
-        const correctCountry = index === countryIndex;
+        let correctCountry = false;
+
+        if (indexWasPassed) {
+          correctCountry = index === countryIndex;
+        } else if (nameWasPassed) {
+          correctCountry = country.name === countryName;
+        }
 
         if (!correctCountry) {
           return country;
