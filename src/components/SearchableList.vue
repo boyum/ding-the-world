@@ -1,11 +1,14 @@
 <template>
   <div class="searchable-list">
-    <input
-      class="searchable-list__search-field"
-      type="text"
-      v-model="$data._searchText"
-      @keyup="_setSearchText"
-    />
+    <label class="searchable-list__search-label">
+      Filter countries
+      <input
+        class="searchable-list__search-field"
+        type="text"
+        v-model="$data._searchText"
+        @keyup="_setSearchText"
+        placeholder="Ex. Algeria, China, Iran..."
+    /></label>
     <div class="searchable-list__empty-state" v-if="!showCountryList">
       No countries to show
     </div>
@@ -63,20 +66,31 @@ export default {
   width: 30vw;
 }
 
-.searchable-list__list {
-  margin: 0 -1rem;
-  height: calc(
-    100vh - (var(--search-field-height) + var(--search-field-margin))
-  );
-  overflow-y: scroll;
-  padding: 0;
+.searchable-list__search-label {
+  display: block;
+  font-weight: 600;
+  margin-top: var(--search-field-margin);
 }
 
 .searchable-list__search-field {
   display: block;
   height: var(--search-field-height);
   line-height: var(--search-field-height);
-  margin-top: var(--search-field-margin);
+  text-indent: 1rem;
   width: 100%;
+}
+
+.searchable-list__empty-state {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.searchable-list__list {
+  margin: 0 -1rem;
+  height: calc(
+    100vh - (var(--search-field-height) + var(--search-field-margin))
+  );
+  overflow-y: scroll;
+  padding: 0 0 1rem;
 }
 </style>
