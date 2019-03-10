@@ -23,7 +23,7 @@ const store = new VueX.Store({
       { countryIndex, countryName } = { countryIndex: -1, countryName: '' }
     ) {
       const indexWasPassed = countryIndex > -1;
-      const nameWasPassed = countryName.length > 0;
+      const nameWasPassed = countryName && countryName.length > 0;
 
       state.countries = state.countries.map((country, index) => {
         let correctCountry = false;
