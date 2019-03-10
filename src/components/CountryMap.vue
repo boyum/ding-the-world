@@ -19,7 +19,7 @@ export default {
         .map(
           (country, index) => `
         [data-name='${country.name}'] {
-          fill: rgb(200, ${country.index}, 255) !important;
+          fill: hsl(${country.index}, 40%, 70%) !important;
         }
       `
         )
