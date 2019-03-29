@@ -1,7 +1,7 @@
 <template>
   <div class="map-container">
-    <div class="map" v-html="mapImg" @click="_toggleVisited" />
-    <div class="style" v-html="visitedCountriesCss" />
+    <div class="map" v-html="mapImg" @click="_toggleVisited"/>
+    <div class="style" v-html="visitedCountriesCss"/>
   </div>
 </template>
 
