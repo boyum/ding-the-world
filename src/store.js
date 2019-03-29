@@ -1,14 +1,14 @@
-import Vue from "vue";
-import VueX from "vuex";
-import createPersistedState from "vuex-persistedstate";
-import MapImg from "./assets/world.svg";
+import Vue from 'vue';
+import VueX from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import MapImg from './assets/world.svg';
 
 Vue.use(VueX);
 
 const store = new VueX.Store({
   plugins: [createPersistedState()],
   state: {
-    searchText: "",
+    searchText: '',
     countries: []
   },
   mutations: {
@@ -20,7 +20,7 @@ const store = new VueX.Store({
     },
     TOGGLE_VISITED(
       state,
-      { countryIndex, countryName } = { countryIndex: -1, countryName: "" }
+      { countryIndex, countryName } = { countryIndex: -1, countryName: '' }
     ) {
       const indexWasPassed = countryIndex > -1;
       const nameWasPassed = countryName && countryName.length > 0;
@@ -50,9 +50,9 @@ const store = new VueX.Store({
       }
 
       const parser = new DOMParser();
-      const doc = parser.parseFromString(MapImg, "image/svg+xml");
-      const paths = [...doc.getElementsByTagName("path")];
-      const countryNames = paths.map(path => path.getAttribute("data-name"));
+      const doc = parser.parseFromString(MapImg, 'image/svg+xml');
+      const paths = [...doc.getElementsByTagName('path')];
+      const countryNames = paths.map(path => path.getAttribute('data-name'));
       paths.sort();
       const countries = countryNames.map((country, index) => ({
         index,
@@ -60,13 +60,13 @@ const store = new VueX.Store({
         isVisited: false
       }));
 
-      commit("SET_COUNTRIES", countries);
+      commit('SET_COUNTRIES', countries);
     },
     setSearchText({ commit }, searchText) {
-      commit("SET_SEARCH_TEXT", searchText);
+      commit('SET_SEARCH_TEXT', searchText);
     },
     toggleVisited({ commit }, countryIndex) {
-      commit("TOGGLE_VISITED", countryIndex);
+      commit('TOGGLE_VISITED', countryIndex);
     }
   },
   getters: {
