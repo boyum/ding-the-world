@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import MapImg from "../assets/world.svg";
+import { mapGetters, mapActions } from 'vuex';
+import MapImg from '../assets/world.svg';
 export default {
   data() {
     return { mapImg: MapImg };
   },
   computed: {
-    ...mapGetters(["visitedCountries"]),
+    ...mapGetters(['visitedCountries']),
     visitedCountriesCss: function() {
       const style = this.visitedCountries
         .map(
@@ -23,15 +23,15 @@ export default {
         }
       `
         )
-        .join(" ");
+        .join(' ');
 
       return `<style>${style}</style>`;
     }
   },
   methods: {
-    ...mapActions(["toggleVisited"]),
+    ...mapActions(['toggleVisited']),
     _toggleVisited: function(event) {
-      const country = event.target.closest("path[data-name]");
+      const country = event.target.closest('path[data-name]');
       const aCountryWasClicked = country !== null;
 
       if (!aCountryWasClicked) {
