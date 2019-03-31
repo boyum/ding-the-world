@@ -22,16 +22,14 @@ const store = new VueX.Store({
       state,
       { countryIndex, countryName } = { countryIndex: -1, countryName: '' }
     ) {
-      const indexWasPassed = countryIndex > -1;
+      const indexWasPassedAndWithinRange = countryIndex > -1 && state.countries.length > countryIndex;
       const nameWasPassed = countryName && countryName.length > 0;
 
       let index;
-      if (indexWasPassed && state.countries.length > indexWasPassed) {
+      if (indexWasPassedAndWithinRange) {
         index = countryIndex;
       } else if (nameWasPassed) {
-        index = state.countries.findIndex(
-          country => country.name === countryName
-        );
+        index = state.countries.findIndex(country => country.name === countryName);
       }
       const country = state.countries[index];
       if (!country) {
