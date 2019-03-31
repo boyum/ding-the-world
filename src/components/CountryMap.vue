@@ -17,7 +17,7 @@ export default {
     visitedCountriesCss: function() {
       const style = this.visitedCountries
         .map(
-          (country, index) => `
+          (country) => `
         [data-name='${country.name}'] {
           fill: hsl(${country.index}, 40%, 70%) !important;
         }
