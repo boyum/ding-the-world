@@ -1,7 +1,7 @@
+import MapImg from './assets/world.svg';
 import Vue from 'vue';
 import VueX from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import MapImg from './assets/world.svg';
 
 Vue.use(VueX);
 
@@ -51,7 +51,7 @@ const store = new VueX.Store({
       const doc = parser.parseFromString(MapImg, 'image/svg+xml');
       const paths = [...doc.getElementsByTagName('path')];
       const countryNames = paths.map(path => path.getAttribute('data-name'));
-      paths.sort();
+      countryNames.sort();
       const countries = countryNames.map((country, index) => ({
         index,
         name: country,
