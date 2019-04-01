@@ -1,7 +1,7 @@
 <template>
   <div class="map-container">
-    <div class="map" v-html="mapImg" @click="_toggleVisited" />
-    <div class="style" v-html="visitedCountriesCss" />
+    <div class="map" v-html="mapImg" @click="_toggleVisited"/>
+    <div class="style" v-html="visitedCountriesCss"/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     visitedCountriesCss: function() {
       const style = this.visitedCountries
         .map(
-          (country, index) => `
+          (country) => `
         [data-name='${country.name}'] {
           fill: hsl(${country.index}, 40%, 70%) !important;
         }
