@@ -58,8 +58,12 @@ export default {
 .searchable-list {
   --search-field-height: 45px;
   --search-field-margin: 10px;
+  --search-label-line-height: 1.5;
+  --search-label-font-size: 1rem;
+
   background-color: #f2f2f2;
   grid-area: searchable-list;
+  height: 100vh;
   max-height: 100vh;
   max-width: 350px;
   padding: 0 1.5rem;
@@ -69,6 +73,8 @@ export default {
 .searchable-list__search-label {
   display: block;
   font-weight: 600;
+  font-size: var(--search-label-font-size);
+  line-height: var(--search-label-line-height);
   margin-top: var(--search-field-margin);
 }
 
@@ -85,12 +91,12 @@ export default {
   margin-top: 1rem;
 }
 
-.searchable-list__list {
+.searchable-list__list {  
   margin: 0 -1rem;
   height: calc(
-    100vh - (var(--search-field-height) + var(--search-field-margin))
+    100vh - (var(--search-field-height) + var(--search-field-margin) + (var(--search-label-line-height) * var(--search-label-font-size)))
   );
   overflow-y: scroll;
-  padding: 0 0 1rem;
+  padding: 0;
 }
 </style>
