@@ -5,7 +5,7 @@
       <input
         class="searchable-list__search-field"
         type="text"
-        v-model="$data._searchText"
+        v-model="$data.searchText"
         @keyup="_setSearchText"
         placeholder="Ex. Algeria, China, Iran..."
     /></label>
@@ -40,12 +40,12 @@ export default {
     }
   },
   data: () => ({
-    _searchText: ''
+    searchText: ''
   }),
   methods: {
     ...mapActions(['setSearchText']),
     _setSearchText() {
-      this.setSearchText(this._data._searchText);
+      this.setSearchText(this._data.searchText);
     }
   },
   components: {
