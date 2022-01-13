@@ -40,12 +40,12 @@ export default {
     }
   },
   data: () => ({
-    _searchText: ''
+    searchText: ''
   }),
   methods: {
     ...mapActions(['setSearchText']),
     _setSearchText() {
-      this.setSearchText(this._data._searchText);
+      this.setSearchText(this._data.searchText);
     }
   },
   components: {
