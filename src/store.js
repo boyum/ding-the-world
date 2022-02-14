@@ -1,11 +1,8 @@
 import MapImg from './assets/world.svg';
-import Vue from 'vue';
-import VueX from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import { createStore } from 'vuex';
 
-Vue.use(VueX);
-
-const store = new VueX.Store({
+export const store = createStore({
   plugins: [createPersistedState()],
   state: {
     searchText: '',
@@ -22,14 +19,17 @@ const store = new VueX.Store({
       state,
       { countryIndex, countryName } = { countryIndex: -1, countryName: '' }
     ) {
-      const indexWasPassedAndWithinRange = countryIndex > -1 && state.countries.length > countryIndex;
+      const indexWasPassedAndWithinRange =
+        countryIndex > -1 && state.countries.length > countryIndex;
       const nameWasPassed = countryName && countryName.length > 0;
 
       let index;
       if (indexWasPassedAndWithinRange) {
         index = countryIndex;
       } else if (nameWasPassed) {
-        index = state.countries.findIndex(country => country.name === countryName);
+        index = state.countries.findIndex(
+          (country) => country.name === countryName
+        );
       }
       const country = state.countries[index];
       if (!country) {
@@ -50,7 +50,7 @@ const store = new VueX.Store({
       const parser = new DOMParser();
       const doc = parser.parseFromString(MapImg, 'image/svg+xml');
       const paths = [...doc.getElementsByTagName('path')];
-      const countryNames = paths.map(path => path.getAttribute('data-name'));
+      const countryNames = paths.map((path) => path.getAttribute('data-name'));
       countryNames.sort();
       const countries = countryNames.map((country, index) => ({
         index,
@@ -69,16 +69,16 @@ const store = new VueX.Store({
   },
   getters: {
     visitedCountries({ countries }) {
-      return countries.filter(country => country.isVisited);
+      return countries.filter((country) => country.isVisited);
     },
     filteredCountries({ countries, searchText }) {
-      return countries.filter(country =>
+      return countries.filter((country) =>
         country.name.toLowerCase().includes(searchText.toLowerCase())
       );
     },
     filteredVisitedCountries({ countries, searchText }) {
       return countries.filter(
-        country =>
+        (country) =>
           country.isVisited &&
           country.name.toLowerCase().includes(searchText.toLowerCase())
       );
@@ -88,5 +88,3 @@ const store = new VueX.Store({
     }
   }
 });
-
-export default store;
