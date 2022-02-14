@@ -2,6 +2,7 @@
   "name": "ding-the-world",
   "version": "0.2.0",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -15,11 +16,12 @@
     "vuex-persistedstate": "4.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/eslint-parser": "^7.17.0",
     "@vue/cli-plugin-babel": "^4.5.15",
-    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^5.0.0-rc.3",
     "@vue/cli-service": "^4.5.15",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.9.0",
     "eslint-plugin-vue": "^8.4.1",
     "prerender-spa-plugin": "^3.4.0",
     "vue-template-compiler": "^2.6.14"
@@ -35,7 +37,7 @@
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     }
   },
   "postcss": {
