@@ -22,7 +22,7 @@
     "@vue/cli-plugin-eslint": "^5.0.0-rc.3",
     "@vue/cli-service": "^4.5.17",
     "eslint": "^8.12.0",
-    "eslint-plugin-vue": "^8.5.0",
+    "eslint-plugin-vue": "^9.7.0",
     "prerender-spa-plugin": "^3.4.0",
     "vue-template-compiler": "^2.6.14"
   },
