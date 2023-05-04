@@ -11,20 +11,20 @@
   },
   "dependencies": {
     "raw-loader": "^4.0.2",
-    "vue": "^3.2.31",
-    "vuex": "^4.0.2",
+    "vue": "^3.2.47",
+    "vuex": "^4.1.0",
     "vuex-persistedstate": "4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/eslint-parser": "^7.17.0",
-    "@vue/cli-plugin-babel": "^5.0.4",
-    "@vue/cli-plugin-eslint": "^5.0.0-rc.3",
-    "@vue/cli-service": "^4.5.17",
-    "eslint": "^8.12.0",
-    "eslint-plugin-vue": "^8.5.0",
+    "@babel/core": "^7.21.8",
+    "@babel/eslint-parser": "^7.21.8",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "eslint": "^8.39.0",
+    "eslint-plugin-vue": "^9.11.0",
     "prerender-spa-plugin": "^3.4.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.7.14"
   },
   "eslintConfig": {
     "root": true,
