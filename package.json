@@ -2,7 +2,7 @@
   "name": "ding-the-world",
   "version": "0.2.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
