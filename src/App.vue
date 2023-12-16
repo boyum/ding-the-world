@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onBeforeMount } from "vue";
 import CountryMap from "./components/CountryMap.vue";
 import SearchableList from "./components/SearchableList.vue";
@@ -8,7 +8,7 @@ function fetchCountries() {
   store.dispatch("fetchCountries");
 }
 
-function setSearchText(text) {
+function setSearchText(text: string) {
   store.dispatch("setSearchText", text);
 }
 

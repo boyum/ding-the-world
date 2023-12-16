@@ -1,13 +1,9 @@
 // @ts-expect-error Vuex is missing types
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
+import type { useStore as VuexUseStore } from "vuex/types/index.js";
 import MapImg from "./assets/world.svg?raw";
-
-type Country = {
-  index: number;
-  name: string;
-  isVisited: boolean;
-};
+import type { Country } from "./types";
 
 type State = {
   searchText: string;
@@ -110,3 +106,7 @@ export const store = createStore({
     },
   },
 });
+
+export const useStore: typeof VuexUseStore<State> = () => {
+  return store;
+};
