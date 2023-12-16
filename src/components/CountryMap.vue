@@ -1,37 +1,31 @@
-<template>
-  <div class="map-container">
-    <div class="map" v-html="mapImg" @click="_toggleVisited"/>
-    <div class="style" v-html="visitedCountriesCss"/>
-  </div>
-</template>
-
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import MapImg from '../assets/world.svg';
+import { mapGetters, mapActions } from "vuex";
+import MapImg from "../assets/world.svg?raw";
+
 export default {
   data() {
     return { mapImg: MapImg };
   },
   computed: {
-    ...mapGetters(['visitedCountries']),
-    visitedCountriesCss: function() {
+    ...mapGetters(["visitedCountries"]),
+    visitedCountriesCss: function () {
       const style = this.visitedCountries
         .map(
-          (country) => `
+          country => `
         [data-name='${country.name}'] {
           fill: hsl(${country.index}, 40%, 70%) !important;
         }
-      `
+        `,
         )
-        .join(' ');
+        .join(" ");
 
       return `<style>${style}</style>`;
-    }
+    },
   },
   methods: {
-    ...mapActions(['toggleVisited']),
-    _toggleVisited: function(event) {
-      const country = event.target.closest('path[data-name]');
+    ...mapActions(["toggleVisited"]),
+    _toggleVisited: function (event) {
+      const country = event.target.closest("path[data-name]");
       const aCountryWasClicked = country !== null;
 
       if (!aCountryWasClicked) {
@@ -40,10 +34,17 @@ export default {
 
       const countryName = country.dataset.name;
       this.toggleVisited({ countryName });
-    }
-  }
+    },
+  },
 };
 </script>
+
+<template>
+  <div class="map-container">
+    <div class="map" v-html="mapImg" @click="_toggleVisited" />
+    <div class="style" v-html="visitedCountriesCss" />
+  </div>
+</template>
 
 <style>
 .map-container {

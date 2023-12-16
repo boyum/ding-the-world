@@ -1,55 +1,41 @@
 {
   "name": "ding-the-world",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "now-build": "npm run build"
+    "build": "run-p type-check \"build-only {@}\" --",
+    "build-only": "vite build",
+    "dev": "vite",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --build --force"
   },
+  "prettier": "prettier-config",
   "dependencies": {
-    "raw-loader": "^4.0.2",
-    "vue": "^3.2.31",
-    "vuex": "^4.0.2",
-    "vuex-persistedstate": "4.1.0"
+    "vue": "^3.3.12",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/eslint-parser": "^7.17.0",
-    "@vue/cli-plugin-babel": "^5.0.4",
-    "@vue/cli-plugin-eslint": "^5.0.0-rc.3",
-    "@vue/cli-service": "^4.5.17",
-    "eslint": "^8.12.0",
-    "eslint-plugin-vue": "^8.5.0",
-    "prerender-spa-plugin": "^3.4.0",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "keywords": [],
-  "description": ""
+    "@rushstack/eslint-patch": "^1.6.1",
+    "@tsconfig/node18": "^18.2.2",
+    "@types/node": "^20.10.4",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "@vue/tsconfig": "^0.5.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "npm-run-all2": "^6.1.1",
+    "prettier": "^3.1.1",
+    "prettier-config": "github:boyum/prettier-config",
+    "typescript": "~5.3.3",
+    "vite": "^5.0.10",
+    "vue-tsc": "^1.8.25",
+    "vuex-persistedstate": "^4.1.0"
+  }
 }

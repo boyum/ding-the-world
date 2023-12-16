@@ -6,26 +6,27 @@
       type="button"
       @click="_toggleVisited"
     >
-      {{ isVisited ? 'Visited!' : 'Visit!' }}
+      {{ isVisited ? "Visited!" : "Visit!" }}
     </button>
   </li>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
+
 export default {
-  props: ['country'],
+  props: ["country"],
   methods: {
-    ...mapActions(['toggleVisited']),
-    _toggleVisited: function() {
+    ...mapActions(["toggleVisited"]),
+    _toggleVisited: function () {
       this.toggleVisited({ countryIndex: this.country.index });
-    }
+    },
   },
   computed: {
-    isVisited: function() {
+    isVisited: function () {
       return this.country.isVisited;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -50,6 +51,7 @@ export default {
 .country__toggle-visited {
   --button-color: #1c9963;
   --button-height: 45px;
+
   background-color: #fff;
   border: 2px solid var(--button-color);
   border-radius: var(--button-height);
@@ -58,7 +60,9 @@ export default {
   font-size: inherit;
   height: var(--button-height);
   line-height: var(--button-height);
-  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition:
+    background-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
   width: 100px;
 }
 
