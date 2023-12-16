@@ -8,4 +8,4 @@ The map is from [SimpleMaps](https://simplemaps.com/resources/svg-world).
 
 ## License
 
-Sindre Bøyum (2019), MIT
+Sindre Bøyum (2019-2023), MIT

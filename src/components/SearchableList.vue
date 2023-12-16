@@ -5,7 +5,7 @@
       <input
         class="searchable-list__search-field"
         type="text"
-        v-model="$data._searchText"
+        v-model="$data.searchText"
         @keyup="_setSearchText"
         placeholder="Ex. Algeria, China, Iran..."
     /></label>
@@ -24,33 +24,35 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import CountryListItem from './CountryListItem.vue';
+import { mapGetters, mapActions } from "vuex";
+import CountryListItem from "./CountryListItem.vue";
 
 export default {
   computed: {
     ...mapGetters([
-      'searchText',
-      'filteredCountries',
-      'visitedCountries',
-      'filteredVisitedCountries'
+      "searchText",
+      "filteredCountries",
+      "visitedCountries",
+      "filteredVisitedCountries",
     ]),
-    showCountryList: function() {
+    showCountryList: function () {
       return this.filteredCountries.length > 0;
-    }
+    },
   },
-  data: () => ({
-    searchText: ''
-  }),
+  data() {
+    return {
+      searchText: "",
+    };
+  },
   methods: {
-    ...mapActions(['setSearchText']),
+    ...mapActions(["setSearchText"]),
     _setSearchText() {
-      this.setSearchText(this._data.searchText);
-    }
+      this.setSearchText(this.$data.searchText);
+    },
   },
   components: {
-    CountryListItem
-  }
+    CountryListItem,
+  },
 };
 </script>
 
@@ -91,10 +93,14 @@ export default {
   margin-top: 1rem;
 }
 
-.searchable-list__list {  
+.searchable-list__list {
   margin: 0 -1rem;
   height: calc(
-    100vh - (var(--search-field-height) + var(--search-field-margin) + (var(--search-label-line-height) * var(--search-label-font-size)))
+    100vh -
+      (
+        var(--search-field-height) + var(--search-field-margin) +
+          (var(--search-label-line-height) * var(--search-label-font-size))
+      )
   );
   overflow-y: scroll;
   padding: 0;
