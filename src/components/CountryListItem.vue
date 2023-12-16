@@ -1,34 +1,31 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "../store";
+import type { Country } from "../types";
+
+const store = useStore();
+
+const props = defineProps<{ country: Country }>();
+
+const isVisited = computed(() => props.country.isVisited);
+
+function toggleVisited() {
+  store.dispatch("toggleVisited", { countryIndex: props.country.index });
+}
+</script>
+
 <template>
   <li class="country" v-bind:class="{ 'country--visited': isVisited }">
     <div class="country__name">{{ country.name }}</div>
     <button
       class="country__toggle-visited"
       type="button"
-      @click="_toggleVisited"
+      @click="toggleVisited"
     >
       {{ isVisited ? "Visited!" : "Visit!" }}
     </button>
   </li>
 </template>
-
-<script>
-import { mapActions } from "vuex";
-
-export default {
-  props: ["country"],
-  methods: {
-    ...mapActions(["toggleVisited"]),
-    _toggleVisited: function () {
-      this.toggleVisited({ countryIndex: this.country.index });
-    },
-  },
-  computed: {
-    isVisited: function () {
-      return this.country.isVisited;
-    },
-  },
-};
-</script>
 
 <style scoped>
 .country {

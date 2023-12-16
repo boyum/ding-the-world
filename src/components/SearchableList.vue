@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { computed, ref } from "vue";
+import { useStore } from "../store";
+import CountryListItem from "./CountryListItem.vue";
+
+const store = useStore();
+
+const searchText = ref("");
+
+const filteredCountries = computed(() => store.getters.filteredCountries);
+const showCountryList = computed(() => filteredCountries.value.length > 0);
+
+function setSearchText() {
+  store.dispatch("setSearchText", searchText.value);
+}
+</script>
+
 <template>
   <div class="searchable-list">
     <label class="searchable-list__search-label">
@@ -5,8 +22,8 @@
       <input
         class="searchable-list__search-field"
         type="text"
-        v-model="$data.searchText"
-        @keyup="_setSearchText"
+        v-model="searchText"
+        @keyup="setSearchText"
         placeholder="Ex. Algeria, China, Iran..."
     /></label>
     <div class="searchable-list__empty-state" v-if="!showCountryList">
@@ -22,39 +39,6 @@
     </ul>
   </div>
 </template>
-
-<script>
-import { mapGetters, mapActions } from "vuex";
-import CountryListItem from "./CountryListItem.vue";
-
-export default {
-  computed: {
-    ...mapGetters([
-      "searchText",
-      "filteredCountries",
-      "visitedCountries",
-      "filteredVisitedCountries",
-    ]),
-    showCountryList: function () {
-      return this.filteredCountries.length > 0;
-    },
-  },
-  data() {
-    return {
-      searchText: "",
-    };
-  },
-  methods: {
-    ...mapActions(["setSearchText"]),
-    _setSearchText() {
-      this.setSearchText(this.$data.searchText);
-    },
-  },
-  components: {
-    CountryListItem,
-  },
-};
-</script>
 
 <style scoped>
 .searchable-list {

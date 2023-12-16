@@ -1,5 +1,8 @@
 svg {
-  path {
-    fill-rule: evenodd;
-  }
+  stroke: #666;
+}
+
+svg path {
+  fill: #f2f2f2;
+  fill-rule: evenodd;
 }
