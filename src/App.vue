@@ -1,22 +1,26 @@
+<script setup>
+import { onBeforeMount } from "vue";
+import CountryMap from "./components/CountryMap.vue";
+import SearchableList from "./components/SearchableList.vue";
+import { store } from "./store";
+
+function fetchCountries() {
+  store.dispatch("fetchCountries");
+}
+
+function setSearchText(text) {
+  store.dispatch("setSearchText", text);
+}
+
+onBeforeMount(() => {
+  fetchCountries();
+  setSearchText("");
+});
+</script>
+
 <template>
   <div id="app" class="app-container"><SearchableList /> <CountryMap /></div>
 </template>
-
-<script>
-import { mapActions } from "vuex";
-import CountryMap from "./components/CountryMap.vue";
-import SearchableList from "./components/SearchableList.vue";
-
-export default {
-  name: "App",
-  components: { SearchableList, CountryMap },
-  methods: mapActions(["fetchCountries", "setSearchText"]),
-  beforeMount() {
-    this.fetchCountries();
-    this.setSearchText("");
-  },
-};
-</script>
 
 <style>
 *,
@@ -24,6 +28,7 @@ export default {
 *::before {
   box-sizing: border-box;
 }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
