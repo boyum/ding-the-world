@@ -3,14 +3,13 @@ import { computed } from "vue";
 import { useStore } from "../store";
 import type { Country } from "../types";
 
-const store = useStore();
-
 const props = defineProps<{ country: Country }>();
-
 const isVisited = computed(() => props.country.isVisited);
 
+const store = useStore();
+
 function toggleVisited() {
-  store.dispatch("toggleVisited", { countryIndex: props.country.index });
+  store.dispatch("toggleVisitedByIndex", props.country.index);
 }
 </script>
 
@@ -32,9 +31,11 @@ function toggleVisited() {
   display: flex;
   margin: 1rem;
 }
+
 .country--visited {
   color: green;
 }
+
 .country__name {
   flex-grow: 1;
   font-size: 1.25rem;

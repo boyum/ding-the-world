@@ -1,7 +1,11 @@
-// @ts-expect-error Vuex is missing types
-import { createStore } from "vuex";
+import type { InjectionKey } from "vue";
+import {
+  createStore,
+  type Store,
+  type StoreOptions,
+  type DispatchOptions,
+} from "vuex";
 import createPersistedState from "vuex-persistedstate";
-import type { useStore as VuexUseStore } from "vuex/types/index.js";
 import MapImg from "./assets/world.svg?raw";
 import type { Country } from "./types";
 
@@ -10,14 +14,9 @@ type State = {
   countries: Country[];
 };
 
-type Commit = (name: string, payload: unknown) => void;
+export const key: InjectionKey<Store<State>> = Symbol();
 
-type ActionContext = {
-  state: State;
-  commit: Commit;
-};
-
-export const store = createStore({
+const storeOptions = {
   plugins: [createPersistedState()],
   state: {
     searchText: "",
@@ -30,34 +29,37 @@ export const store = createStore({
     SET_COUNTRIES(state: State, countries: Country[]) {
       state.countries = countries;
     },
-    TOGGLE_VISITED(
-      state: State,
-      { countryIndex, countryName } = { countryIndex: -1, countryName: "" },
-    ) {
-      const indexWasPassedAndWithinRange =
-        countryIndex > -1 && state.countries.length > countryIndex;
-      const nameWasPassed = countryName && countryName.length > 0;
+    TOGGLE_VISITED_BY_INDEX(state: State, countryIndex: number) {
+      const validIndex =
+        -1 < countryIndex && countryIndex < state.countries.length;
 
-      let index = -1;
-      if (indexWasPassedAndWithinRange) {
-        index = countryIndex;
-      } else if (nameWasPassed) {
-        index = state.countries.findIndex(
-          country => country.name === countryName,
-        );
-      }
-
-      const country = state.countries[index];
-      if (!country) {
+      if (!validIndex) {
         return;
       }
 
+      const country = state.countries[countryIndex];
       country.isVisited = !country.isVisited;
-      state.countries[index] = country;
+      state.countries[countryIndex] = country;
+    },
+
+    TOGGLE_VISITED_BY_NAME(state: State, countryName: string) {
+      const countryIndex = state.countries.findIndex(
+        country => country.name === countryName,
+      );
+
+      const countryNotFound = countryIndex < 0;
+      if (countryNotFound) {
+        return;
+      }
+
+      const country = state.countries[countryIndex];
+
+      country.isVisited = !country.isVisited;
+      state.countries[countryIndex] = country;
     },
   },
   actions: {
-    fetchCountries({ state, commit }: ActionContext) {
+    fetchCountries({ state, commit }) {
       const countriesListIsEmpty = state.countries.length < 1;
 
       if (!countriesListIsEmpty) {
@@ -78,35 +80,55 @@ export const store = createStore({
 
       commit("SET_COUNTRIES", countries);
     },
-    setSearchText({ commit }: ActionContext, searchText: string) {
+    setSearchText({ commit }, searchText: string) {
       commit("SET_SEARCH_TEXT", searchText);
     },
-    toggleVisited({ commit }: ActionContext, countryIndex: number) {
-      commit("TOGGLE_VISITED", countryIndex);
+    toggleVisitedByName({ commit }, countryName: string) {
+      commit("TOGGLE_VISITED_BY_NAME", countryName);
+    },
+    toggleVisitedByIndex({ commit }, countryIndex: number) {
+      commit("TOGGLE_VISITED_BY_INDEX", countryIndex);
     },
   },
   getters: {
-    visitedCountries({ countries }: State) {
+    visitedCountries({ countries }) {
       return countries.filter(country => country.isVisited);
     },
-    filteredCountries({ countries, searchText }: State) {
+    filteredCountries({ countries, searchText }) {
       return countries.filter(country =>
         country.name.toLowerCase().includes(searchText.toLowerCase()),
       );
     },
-    filteredVisitedCountries({ countries, searchText }: State) {
+    filteredVisitedCountries({ countries, searchText }) {
       return countries.filter(
         country =>
           country.isVisited &&
           country.name.toLowerCase().includes(searchText.toLowerCase()),
       );
     },
-    searchText({ searchText }: State) {
+    searchText({ searchText }) {
       return searchText;
     },
   },
-});
+} as const satisfies StoreOptions<State>;
 
-export const useStore: typeof VuexUseStore<State> = () => {
-  return store;
+export const store = createStore<State>(storeOptions);
+
+type Getters = (typeof storeOptions)["getters"];
+type GetterReturns = {
+  [TGetterKey in keyof Getters]: ReturnType<Getters[TGetterKey]>;
 };
+
+type Actions = (typeof storeOptions)["actions"];
+type Dispatch = <T extends keyof Actions>(
+  type: T,
+  payload?: Parameters<Actions[T]>[1],
+  options?: DispatchOptions,
+) => ReturnType<Actions[T]>;
+
+export function useStore() {
+  return store as Omit<Store<State>, "getters" | "dispatch"> & {
+    getters: GetterReturns;
+    dispatch: Dispatch;
+  };
+}

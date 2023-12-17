@@ -2,7 +2,9 @@
 import { onBeforeMount } from "vue";
 import CountryMap from "./components/CountryMap.vue";
 import SearchableList from "./components/SearchableList.vue";
-import { store } from "./store";
+import { useStore } from "./store";
+
+const store = useStore();
 
 function fetchCountries() {
   store.dispatch("fetchCountries");
@@ -19,7 +21,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div id="app" class="app-container"><SearchableList /> <CountryMap /></div>
+  <div id="app" class="app-container"><SearchableList /><CountryMap /></div>
 </template>
 
 <style>

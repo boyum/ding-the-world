@@ -42,7 +42,7 @@ function toggleVisited(event: MouseEvent) {
   }
 
   const countryName = country.dataset.name;
-  store.dispatch("toggleVisited", { countryName });
+  store.dispatch("toggleVisitedByName", countryName);
 }
 </script>
 

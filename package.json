@@ -10,7 +10,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint:check -- --fix",
     "preview": "vite preview",
     "type-check": "vue-tsc --build --force"
   },
