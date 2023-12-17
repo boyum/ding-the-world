@@ -1,6 +1,6 @@
 # Ding the world! 🌍
 
-![Screenshot of app](src/assets/ding-the-world-banner.JPG)
+![Screenshot of app](./ding-the-world-banner.JPG)
 
 This is an interactive scratch map built with [Vue](http://vuejs.org), [VueX](https://github.com/vuejs/vuex/), and [VueXPersistedState](https://github.com/robinvdvleuten/vuex-persistedstate)!
 
