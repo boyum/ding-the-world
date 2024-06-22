@@ -33,7 +33,7 @@
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.1.1",
     "prettier-config": "github:boyum/prettier-config",
-    "typescript": "~5.3.3",
+    "typescript": "~5.5.2",
     "vite": "^5.0.13",
     "vue-tsc": "^1.8.26",
     "vuex-persistedstate": "^4.1.0"
